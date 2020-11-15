@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>R语言之序列的自相关检验与处理 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="R语言之序列的自相关检验与处理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-15 16:59" pubdate>
+        November 15, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">R语言之序列的自相关检验与处理</h1>
+            
+            <div class="markdown-body">
+              <h1 id="习题4-13"><a href="#习题4-13" class="headerlink" title="习题4.13"></a>习题4.13</h1><h4 id="0-编写查取DW检验上下界的函数"><a href="#0-编写查取DW检验上下界的函数" class="headerlink" title="0.编写查取DW检验上下界的函数"></a>0.编写查取DW检验上下界的函数</h4><pre><code class="hljs R"><span class="hljs-comment">#由于r中不能查取DW检验上下界，故首先编写函数</span>
+<span class="hljs-comment">#导入DW检验上下界表</span>
+<span class="hljs-comment">#根据4.13和4.14题目的需求，只导入表中部分内容，并对部分缺失值进行了填补</span>
+<span class="hljs-comment">#此处观测值数目取15-55，解释变量数目为2，3</span>
+K2&lt;-read.csv(<span class="hljs-string">&quot;C:/Users/DELL/Desktop/dw_k2.csv&quot;</span>)
+K3&lt;-read.csv(<span class="hljs-string">&quot;C:/Users/DELL/Desktop/dw_k3.csv&quot;</span>)
+K2$N=<span class="hljs-built_in">c</span>(<span class="hljs-number">15</span>:<span class="hljs-number">55</span>)
+K3$N=<span class="hljs-built_in">c</span>(<span class="hljs-number">15</span>:<span class="hljs-number">55</span>)
+dw_list=<span class="hljs-built_in">list</span>(K2,K3)
+dw_list
+
+<span class="hljs-comment">#调取观测值数目n，解释变量数目为k的对应dL和dU值</span>
+dw_critical&lt;-<span class="hljs-keyword">function</span>(n,k)&#123;
+ dL=dw_list[[k-<span class="hljs-number">1</span>]][n-<span class="hljs-number">14</span>,<span class="hljs-number">1</span>]
+ dU=dw_list[[k-<span class="hljs-number">1</span>]][n-<span class="hljs-number">14</span>,<span class="hljs-number">2</span>]
+ dL_=<span class="hljs-number">4</span>-dL
+ dU_=<span class="hljs-number">4</span>-dU
+ print(data.frame(dL,dU,dU_,dL_))          
+&#125;
+
+<span class="hljs-comment">#测试函数效果</span>
+dw_critical(n=<span class="hljs-number">15</span>,k=<span class="hljs-number">2</span>)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112220654272.png" srcset="/img/loading.gif" alt=" " style="zoom: 80%;" />
+
+
+
+<h4 id="1-导入数据建立初始回归方程"><a href="#1-导入数据建立初始回归方程" class="headerlink" title="1.导入数据建立初始回归方程"></a>1.导入数据建立初始回归方程</h4><pre><code class="hljs R"><span class="hljs-comment">#导入数据</span>
+data4.13&lt;-read.csv(<span class="hljs-string">&quot;C:/Users/DELL/Desktop/4.13.csv&quot;</span>)
+
+attach(data4.13)
+<span class="hljs-comment">#最小二乘法建立回归方程</span>
+lm1&lt;-lm(y~x,data=data4.13)
+summary(lm1)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112221439037.png" srcset="/img/loading.gif" alt="image-20201112221439037" style="zoom:67%;" />
+
+<p><strong>结果分析</strong>：<strong>利用最小二乘估计建立回归模型，得到回归方程</strong><br>$$<br>\hat{y}=-1.435+0.176x<br>$$</p>
+<h4 id="2-残差分析"><a href="#2-残差分析" class="headerlink" title="2.残差分析"></a>2.残差分析</h4><pre><code class="hljs R"><span class="hljs-comment">#计算残差</span>
+e=resid(lm1)
+
+<span class="hljs-comment">#绘制残差散点图</span>
+plot(data4.13$x,e,ylim=<span class="hljs-built_in">c</span>(-<span class="hljs-number">0.2</span>,<span class="hljs-number">0.2</span>))
+abline(h=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),lty=<span class="hljs-number">5</span>)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112221527664.png" srcset="/img/loading.gif" alt="image-20201112221527664" style="zoom:50%;" />
+
+
+
+<h4 id="3-自相关检验"><a href="#3-自相关检验" class="headerlink" title="3.自相关检验"></a>3.自相关检验</h4><h5 id="3-1图检验-定性"><a href="#3-1图检验-定性" class="headerlink" title="3.1图检验(定性)"></a>3.1图检验(定性)</h5><pre><code class="hljs R"><span class="hljs-comment">#自相关检验</span>
+<span class="hljs-comment">#1.图检验</span>
+n=<span class="hljs-built_in">length</span>(e)
+e_i=e[<span class="hljs-built_in">c</span>(<span class="hljs-number">2</span>:n)]
+e_i_1=e[<span class="hljs-built_in">c</span>(<span class="hljs-number">1</span>:n-<span class="hljs-number">1</span>)]
+plot(e_i_1,e_i,ylim=<span class="hljs-built_in">c</span>(-<span class="hljs-number">0.3</span>,<span class="hljs-number">0.3</span>))
+abline(h=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),v=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),lty=<span class="hljs-number">5</span>)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112221728148.png" srcset="/img/loading.gif" alt="image-20201112221728148" style="zoom:50%;" />
+
+
+
+<h5 id="3-2DW检验-定量"><a href="#3-2DW检验-定量" class="headerlink" title="3.2DW检验(定量)"></a>3.2DW检验(定量)</h5><pre><code class="hljs R"><span class="hljs-comment">#2.DW检验</span>
+<span class="hljs-comment">#（1）法1：</span>
+library(lmtest)
+dwtest(lm1,alternative=<span class="hljs-string">&quot;two.sided&quot;</span>)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112234640081.png" srcset="/img/loading.gif" alt="image-20201112234640081" style="zoom:80%;" />
+
+<pre><code class="hljs R"><span class="hljs-comment">#（2）法2：</span>
+library(car)
+dw=durbinWatsonTest(lm1)
+dw
+rho_hat=dw[[<span class="hljs-number">1</span>]]
+dw_value=dw[[<span class="hljs-number">2</span>]]</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201112234757503.png" srcset="/img/loading.gif" alt="image-20201112234757503" style="zoom:80%;" />
+
+
+
+<p><strong>结果分析：</strong> </p>
+<table>
+<thead>
+<tr>
+<th>——定性（图检验）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a. 残差散点图：以自变量x为横轴，残差e为纵轴，绘制残差散点图，可发现点的分布具有规律性，形似“M”，故可推测残差序列可能在一定程度上具有周期性，随机误差项存在自相关。</td>
+</tr>
+<tr>
+<td>b. 残差自相关图：以e(i-1)为横轴，e(i)为纵轴，绘制残差e的自相关图，可以发现，点主要分布在1和3象限，具有趋势性，故基本可以认定随机误差项存在正自相关性。</td>
+</tr>
+<tr>
+<td><strong>——定量（利用DW统计量判断序列的自相关性）</strong></td>
+</tr>
+<tr>
+<td>由输出结果可知，p_value&lt;0.05，故序列存在明显的自相关性。</td>
+</tr>
+</tbody></table>
+<h4 id="4-处理序列自相关"><a href="#4-处理序列自相关" class="headerlink" title="4.处理序列自相关"></a>4.处理序列自相关</h4><h5 id="4-1迭代法"><a href="#4-1迭代法" class="headerlink" title="4.1迭代法"></a>4.1迭代法</h5><pre><code class="hljs R"><span class="hljs-comment">#处理序列相关</span>
+<span class="hljs-comment">#1.迭代法</span>
+<span class="hljs-comment">#初始化重要参数</span>
+y_new=data4.13$y
+x_new=data4.13$x
+len=<span class="hljs-built_in">length</span>(y_new)
+iter=<span class="hljs-number">0</span><span class="hljs-comment">#迭代次数</span>
+j=<span class="hljs-number">0</span><span class="hljs-comment">#结果list索引</span>
+dw_critical_value=dw_critical(n=len,k=<span class="hljs-number">2</span>)
+dL_value=dw_critical_value[[<span class="hljs-number">1</span>]][<span class="hljs-number">1</span>]
+dU_value=dw_critical_value[[<span class="hljs-number">2</span>]][<span class="hljs-number">1</span>]
+dU__value=dw_critical_value[[<span class="hljs-number">3</span>]][<span class="hljs-number">1</span>]
+dL__value=dw_critical_value[[<span class="hljs-number">4</span>]][<span class="hljs-number">1</span>]
+
+result=vector(mode=<span class="hljs-string">&quot;list&quot;</span>)<span class="hljs-comment">#存储结果</span>
+
+<span class="hljs-comment">#开始循环迭代，直至某次迭代中模型的DW值落于确定无自相关的区域</span>
+<span class="hljs-keyword">while</span>(dw_value&lt;dU_value||dw_value&gt;dU__value)&#123;
+  <span class="hljs-comment">#更新数据，建模</span>
+  dw_value&lt;dU_value||dw_value&gt;dU__value
+  y_new=y_new[<span class="hljs-number">2</span>:len]-rho_hat*y_new[<span class="hljs-number">1</span>:len-<span class="hljs-number">1</span>]
+  x_new=x_new[<span class="hljs-number">2</span>:len]-rho_hat*x_new[<span class="hljs-number">1</span>:len-<span class="hljs-number">1</span>]
+  lm_new=lm(y_new~x_new)
+    
+  <span class="hljs-comment">#DW检验得到DW值和rho_hat值</span>
+  dw_new=durbinWatsonTest(lm_new)
+  rho_hat=dw_new[[<span class="hljs-number">1</span>]]
+  dw_value=dw_new[[<span class="hljs-number">2</span>]]
+    
+  <span class="hljs-comment">#更新参数</span>
+  len=len-<span class="hljs-number">1</span>
+  dw_critical_value=dw_critical(n=len,k=<span class="hljs-number">2</span>)
+  dL_value=dw_critical_value[[<span class="hljs-number">1</span>]][<span class="hljs-number">1</span>]
+  dU_value=dw_critical_value[[<span class="hljs-number">2</span>]][<span class="hljs-number">1</span>]
+  dU__value=dw_critical_value[[<span class="hljs-number">3</span>]][<span class="hljs-number">1</span>]
+  dL__value=dw_critical_value[[<span class="hljs-number">4</span>]][<span class="hljs-number">1</span>]
+    
+  <span class="hljs-comment">#将DW值落于不确定和确定无自相关的模型结果存储，以便后期根据模型拟合优度进行选择</span>
+  <span class="hljs-keyword">if</span>(dw_value&gt;dL_value&amp;&amp;dw_value&lt;dL__value)&#123;
+    j=j+<span class="hljs-number">1</span>
+    result[[j]]=summary(lm_new)
+  &#125;
+  <span class="hljs-comment">#迭代</span>
+  iter=iter+<span class="hljs-number">1</span>
+&#125;
+result
+iter</code></pre>
+
+<p><img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201113000021367.png" srcset="/img/loading.gif" alt="image-20201113000021367" style="zoom: 67%;" /><img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201113000053417.png" srcset="/img/loading.gif" alt="image-20201113000053417" style="zoom: 67%;" /></p>
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201113000116157.png" srcset="/img/loading.gif" alt="image-20201113000116157" style="zoom: 80%;" />
+
+<p><strong>结果分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>算法分析：</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.由于循环条件为：<strong>模型的DW统计量未落入无自相关区域</strong>，故由迭代次数为2可知，进行两次迭代操作后的最终模型，其随机误差项满足无自相关。</td>
+</tr>
+<tr>
+<td>2.由于把每次循环后的模型总结，存储入result中的条件为：<strong>模型的DW统计量落入不确定自相关和确定无自相关区域</strong>，故由result返回的结果可知，一次迭代后的模型DW统计量落入不确定自相关的区域。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>一次迭代</th>
+<th>二次迭代</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DW统计量落入不确定自相关区域</td>
+<td>DW统计量未落入无自相关区域</td>
+</tr>
+<tr>
+<td>残差标准差0.073&lt;原始方程残差标准差0.9744</td>
+<td>残差标准差0.686&lt;0.073&lt;0.9744</td>
+</tr>
+<tr>
+<td>通过F检验</td>
+<td>通过F检验</td>
+</tr>
+<tr>
+<td>拟合优度R方值/调整后的R方值=0.9938/0.9935</td>
+<td>拟合优度R方值/调整后的R方值=0.9905/0.9899</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>综合结果分析：</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>由上述两条结论可知，result中返回的两个模型——一次迭代和二次迭代，都一定程度上消除了随机误差项的自相关性。因此，需要综合考量模型拟合优度，是否通过显著性检验等，做出最优选择。其中，在全部通过检验的情况下，一次迭代的拟合优度值更高，在模型尽可能简化的原则下，应优选一次迭代的模型。</td>
+</tr>
+</tbody></table>
+<h5 id="4-2差分法"><a href="#4-2差分法" class="headerlink" title="4.2差分法"></a>4.2差分法</h5><pre><code class="hljs R"><span class="hljs-comment">#2.一阶差分</span>
+len=<span class="hljs-built_in">length</span>(data4.13$y)
+dy=data4.13$y[<span class="hljs-number">2</span>:len]-data4.13$y[<span class="hljs-number">1</span>:len-<span class="hljs-number">1</span>]
+dx=diff(data4.13$x)<span class="hljs-comment">#做差分的两种方式</span>
+lm3=lm(dy~dx)
+summary(lm3)
+<span class="hljs-comment">#DW检验</span>
+dwtest(lm3,alternative=<span class="hljs-string">&#x27;two.sided&#x27;</span>)
+dw_critical(n=len,k=<span class="hljs-number">2</span>)
+
+detach(data4.13)</code></pre>
+
+<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20201113000750270.png" srcset="/img/loading.gif" alt="image-20201113000750270" style="zoom:80%;" />
+
+
+
+<h4 id="5-各回归模型的优良性对比"><a href="#5-各回归模型的优良性对比" class="headerlink" title="5.各回归模型的优良性对比"></a>5.各回归模型的优良性对比</h4><table>
+<thead>
+<tr>
+<th>原始回归模型</th>
+<th>一次迭代</th>
+<th>二次迭代</th>
+<th>差分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正自相关</td>
+<td>不确定自相关</td>
+<td>无自相关</td>
+<td>无自相关</td>
+</tr>
+<tr>
+<td>显著通过F检验、t检验</td>
+<td>显著通过F检验</td>
+<td>显著通过F检验</td>
+<td>显著通过F检验</td>
+</tr>
+<tr>
+<td>残差标准差0.9744</td>
+<td>0.073</td>
+<td>0.068</td>
+<td>0.074</td>
+</tr>
+<tr>
+<td>拟合优度R方值/调整后的R方值=0.9985/0.9984</td>
+<td>0.9938/0.9935</td>
+<td>0.9905/0.9899</td>
+<td>0.9573/0.9548</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>结果分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.原始回归模型拟合效果最优。</td>
+</tr>
+<tr>
+<td>2.处理序列自相关问题上，差分法最为简便，一次差分即可将自相关性消除得很彻底。但从R方值和残差标准差来看，模型的拟合优度逊于迭代法。</td>
+</tr>
+</tbody></table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%94%E7%94%A8%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90-R%E8%AF%AD%E8%A8%80-DW%E6%A3%80%E9%AA%8C/">应用回归分析 R语言 DW检验</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/15/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">R语言之序列的自相关检验与处理(多元线性回归)</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/13/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%E6%A1%86%E6%9E%B6%EF%BC%89/">
+                        <span class="hidden-mobile">搭建个人博客（Hexo框架）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
