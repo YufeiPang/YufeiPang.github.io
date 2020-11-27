@@ -249,11 +249,7 @@ dw_critical&lt;-<span class="hljs-keyword">function</span>(n,k)&#123;
 
 <span class="hljs-comment">#测试函数效果</span>
 dw_critical(n=<span class="hljs-number">15</span>,k=<span class="hljs-number">2</span>)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/1.png" srcset="/img/loading.gif" class="">
-
-
-
 <h4 id="1-导入数据建立初始回归方程"><a href="#1-导入数据建立初始回归方程" class="headerlink" title="1.导入数据建立初始回归方程"></a>1.导入数据建立初始回归方程</h4><pre><code class="hljs R"><span class="hljs-comment">#导入数据</span>
 data4.13&lt;-read.csv(<span class="hljs-string">&quot;C:/Users/DELL/Desktop/4.13.csv&quot;</span>)
 
@@ -261,21 +257,16 @@ attach(data4.13)
 <span class="hljs-comment">#最小二乘法建立回归方程</span>
 lm1&lt;-lm(y~x,data=data4.13)
 summary(lm1)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/2.png" srcset="/img/loading.gif" class="">
-
-<p><strong>结果分析</strong>：<strong>利用最小二乘估计建立回归模型，得到回归方程</strong><br>$$<br>\hat{y}=-1.435+0.176x<br>$$</p>
-<h4 id="2-残差分析"><a href="#2-残差分析" class="headerlink" title="2.残差分析"></a>2.残差分析</h4><pre><code class="hljs R"><span class="hljs-comment">#计算残差</span>
+<p><strong>结果分析</strong>：<strong>利用最小二乘估计建立回归模型，得到回归方程</strong></p>
+<script type="math/tex; mode=display">
+\hat{y}=-1.435+0.176x</script><h4 id="2-残差分析"><a href="#2-残差分析" class="headerlink" title="2.残差分析"></a>2.残差分析</h4><pre><code class="hljs R"><span class="hljs-comment">#计算残差</span>
 e=resid(lm1)
 
 <span class="hljs-comment">#绘制残差散点图</span>
 plot(data4.13$x,e,ylim=<span class="hljs-built_in">c</span>(-<span class="hljs-number">0.2</span>,<span class="hljs-number">0.2</span>))
 abline(h=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),lty=<span class="hljs-number">5</span>)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/3.png" srcset="/img/loading.gif" class="">
-
-
-
 <h4 id="3-自相关检验"><a href="#3-自相关检验" class="headerlink" title="3.自相关检验"></a>3.自相关检验</h4><h5 id="3-1图检验-定性"><a href="#3-1图检验-定性" class="headerlink" title="3.1图检验(定性)"></a>3.1图检验(定性)</h5><pre><code class="hljs R"><span class="hljs-comment">#自相关检验</span>
 <span class="hljs-comment">#1.图检验</span>
 n=<span class="hljs-built_in">length</span>(e)
@@ -283,37 +274,29 @@ e_i=e[<span class="hljs-built_in">c</span>(<span class="hljs-number">2</span>:n)
 e_i_1=e[<span class="hljs-built_in">c</span>(<span class="hljs-number">1</span>:n-<span class="hljs-number">1</span>)]
 plot(e_i_1,e_i,ylim=<span class="hljs-built_in">c</span>(-<span class="hljs-number">0.3</span>,<span class="hljs-number">0.3</span>))
 abline(h=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),v=<span class="hljs-built_in">c</span>(<span class="hljs-number">0</span>),lty=<span class="hljs-number">5</span>)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/4.png" srcset="/img/loading.gif" class="">
-
-
-
 <h5 id="3-2DW检验-定量"><a href="#3-2DW检验-定量" class="headerlink" title="3.2DW检验(定量)"></a>3.2DW检验(定量)</h5><pre><code class="hljs R"><span class="hljs-comment">#2.DW检验</span>
 <span class="hljs-comment">#（1）法1：</span>
 library(lmtest)
 dwtest(lm1,alternative=<span class="hljs-string">&quot;two.sided&quot;</span>)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/5.png" srcset="/img/loading.gif" class="">
-
 <pre><code class="hljs R"><span class="hljs-comment">#（2）法2：</span>
 library(car)
 dw=durbinWatsonTest(lm1)
 dw
 rho_hat=dw[[<span class="hljs-number">1</span>]]
 dw_value=dw[[<span class="hljs-number">2</span>]]</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/6.png" srcset="/img/loading.gif" class="">
-
-
-
 <p><strong>结果分析：</strong> </p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>——定性（图检验）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>a. 残差散点图：以自变量x为横轴，残差e为纵轴，绘制残差散点图，可发现点的分布具有规律性，形似“M”，故可推测残差序列可能在一定程度上具有周期性，随机误差项存在自相关。</td>
 </tr>
 <tr>
@@ -325,7 +308,9 @@ dw_value=dw[[<span class="hljs-number">2</span>]]</code></pre>
 <tr>
 <td>由输出结果可知，p_value&lt;0.05，故序列存在明显的自相关性。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="4-处理序列自相关"><a href="#4-处理序列自相关" class="headerlink" title="4.处理序列自相关"></a>4.处理序列自相关</h4><h5 id="4-1迭代法"><a href="#4-1迭代法" class="headerlink" title="4.1迭代法"></a>4.1迭代法</h5><pre><code class="hljs R"><span class="hljs-comment">#处理序列相关</span>
 <span class="hljs-comment">#1.迭代法</span>
 <span class="hljs-comment">#初始化重要参数</span>
@@ -373,29 +358,28 @@ result=vector(mode=<span class="hljs-string">&quot;list&quot;</span>)<span class
 &#125;
 result
 iter</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/7.png" srcset="/img/loading.gif" class="">
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/8.png" srcset="/img/loading.gif" class="">
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/9.png" srcset="/img/loading.gif" class="">
-
-
-
 <p><strong>结果分析：</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>算法分析：</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1.由于循环条件为：<strong>模型的DW统计量未落入无自相关区域</strong>，故由迭代次数为2可知，进行两次迭代操作后的最终模型，其随机误差项满足无自相关。</td>
 </tr>
 <tr>
 <td>2.由于把每次循环后的模型总结，存储入result中的条件为：<strong>模型的DW统计量落入不确定自相关和确定无自相关区域</strong>，故由result返回的结果可知，一次迭代后的模型DW统计量落入不确定自相关的区域。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -403,7 +387,8 @@ iter</code></pre>
 <th>二次迭代</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>DW统计量落入不确定自相关区域</td>
 <td>DW统计量未落入无自相关区域</td>
 </tr>
@@ -419,17 +404,23 @@ iter</code></pre>
 <td>拟合优度R方值/调整后的R方值=0.9938/0.9935</td>
 <td>拟合优度R方值/调整后的R方值=0.9905/0.9899</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>综合结果分析：</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>由上述两条结论可知，result中返回的两个模型——一次迭代和二次迭代，都一定程度上消除了随机误差项的自相关性。因此，需要综合考量模型拟合优度，是否通过显著性检验等，做出最优选择。其中，在全部通过检验的情况下，一次迭代的拟合优度值更高，在模型尽可能简化的原则下，应优选一次迭代的模型。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="4-2差分法"><a href="#4-2差分法" class="headerlink" title="4.2差分法"></a>4.2差分法</h5><pre><code class="hljs R"><span class="hljs-comment">#2.一阶差分</span>
 len=<span class="hljs-built_in">length</span>(data4.13$y)
 dy=data4.13$y[<span class="hljs-number">2</span>:len]-data4.13$y[<span class="hljs-number">1</span>:len-<span class="hljs-number">1</span>]
@@ -441,12 +432,9 @@ dwtest(lm3,alternative=<span class="hljs-string">&#x27;two.sided&#x27;</span>)
 dw_critical(n=len,k=<span class="hljs-number">2</span>)
 
 detach(data4.13)</code></pre>
-
 <img src="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/10.png" srcset="/img/loading.gif" class="">
-
-
-
-<h4 id="5-各回归模型的优良性对比"><a href="#5-各回归模型的优良性对比" class="headerlink" title="5.各回归模型的优良性对比"></a>5.各回归模型的优良性对比</h4><table>
+<h4 id="5-各回归模型的优良性对比"><a href="#5-各回归模型的优良性对比" class="headerlink" title="5.各回归模型的优良性对比"></a>5.各回归模型的优良性对比</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>原始回归模型</th>
@@ -455,7 +443,8 @@ detach(data4.13)</code></pre>
 <th>差分</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>正自相关</td>
 <td>不确定自相关</td>
 <td>无自相关</td>
@@ -479,20 +468,26 @@ detach(data4.13)</code></pre>
 <td>0.9905/0.9899</td>
 <td>0.9573/0.9548</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>结果分析</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1.原始回归模型拟合效果最优。</td>
 </tr>
 <tr>
 <td>2.处理序列自相关问题上，差分法最为简便，一次差分即可将自相关性消除得很彻底。但从R方值和残差标准差来看，模型的拟合优度逊于迭代法。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
             </div>
             <hr>
@@ -685,6 +680,45 @@ detach(data4.13)</code></pre>
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 

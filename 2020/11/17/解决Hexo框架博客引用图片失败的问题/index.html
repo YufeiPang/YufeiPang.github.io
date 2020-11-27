@@ -230,7 +230,6 @@
               <h1 id="解决Hexo框架博客引用图片失败的问题"><a href="#解决Hexo框架博客引用图片失败的问题" class="headerlink" title="解决Hexo框架博客引用图片失败的问题"></a>解决Hexo框架博客引用图片失败的问题</h1><h3 id="1-插件安装与配置"><a href="#1-插件安装与配置" class="headerlink" title="1.插件安装与配置"></a>1.插件安装与配置</h3><p><strong>（1）打开cmd命令行键入以下内容：</strong></p>
 <pre><code class="hljs php">npm install -g cnpm --registry=https:<span class="hljs-comment">//registry.npm.taobao.org  #载入镜像源</span>
 cnpm install https:<span class="hljs-comment">//github.com/CodeFalling/hexo-asset-image --save  #安装插件hexo-asset-image</span></code></pre>
-
 <p><strong>（2）用记事本打开/node_modules/hexo-asset-image/index.js，将内容替换为如下代码：</strong></p>
 <pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span>;
 <span class="hljs-keyword">var</span> cheerio = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cheerio&#x27;</span>);
@@ -293,35 +292,32 @@ hexo.extend.filter.register(<span class="hljs-string">&#x27;after_post_render&#x
     &#125;
   &#125;
 &#125;);</code></pre>
-
 <p><strong>（3）打开blog文件夹中的_config.yml修改下述两项内容：</strong></p>
 <pre><code class="hljs php">post_asset_folder: <span class="hljs-literal">true</span></code></pre>
-
 <pre><code class="hljs php"><span class="hljs-comment"># URL</span>
 <span class="hljs-comment">## If your site is put in a subdirectory, set url as &#x27;http://example.com/child&#x27; and root as &#x27;/child/&#x27;</span>
 url: http:<span class="hljs-comment">//github注册昵称.github.io</span></code></pre>
-
-
-
 <h3 id="2-图片存储与引用"><a href="#2-图片存储与引用" class="headerlink" title="2.图片存储与引用"></a>2.图片存储与引用</h3><p><strong>(1)【存储】在cmd命令行键入</strong></p>
 <pre><code class="hljs php">hexo n <span class="hljs-string">&quot;文章名&quot;</span></code></pre>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>随即在/blog/source/_posts目录下会产生：</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>(i).“文章名.md“文件</td>
 </tr>
 <tr>
 <td>(ii).”文章名“文件夹——将图片全部存入该文件夹内</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>(2)【图片引用】编辑.md文件时，需使用下述语句：</strong></p>
 <pre><code class="hljs php">&#123;% asset_img 图片名.图片格式 %&#125;  <span class="hljs-comment">##举例：&#123;% asset_img thisisapicture.png %&#125;</span></code></pre>
-
 
             </div>
             <hr>
@@ -344,6 +340,12 @@ url: http:<span class="hljs-comment">//github注册昵称.github.io</span></code
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2020/11/28/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%87%AA%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9-1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">R语言之自变量选择(1)</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -508,6 +510,45 @@ url: http:<span class="hljs-comment">//github注册昵称.github.io</span></code
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
