@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>用Python批量合并Word文档</title>
+    <link href="/2020/12/07/%E7%94%A8Python%E6%89%B9%E9%87%8F%E5%90%88%E5%B9%B6Word%E6%96%87%E6%A1%A3/"/>
+    <url>/2020/12/07/%E7%94%A8Python%E6%89%B9%E9%87%8F%E5%90%88%E5%B9%B6Word%E6%96%87%E6%A1%A3/</url>
+    
+    <content type="html"><![CDATA[<pre><code class="hljs python"><span class="hljs-comment">#导库用以获取目录路径</span><span class="hljs-keyword">import</span> os<span class="hljs-keyword">import</span> win32com.client <span class="hljs-keyword">as</span>  win32<span class="hljs-comment">#启动word对象应用</span>word=win32.gencache.EnsureDispatch(<span class="hljs-string">&#x27;Word.Application&#x27;</span>)<span class="hljs-comment">#需要合并的文件所在路径</span>word.Visible = <span class="hljs-literal">False</span>path=<span class="hljs-string">r&#x27;C:\Users\DELL\Desktop\数据分析题目&#x27;</span><span class="hljs-comment">#如果出现错误-2147023174, &#x27;RPC 服务器不可用。&#x27;, None, None</span><span class="hljs-comment">#打开控制面板——管理工具——服务——分别找到“DCOM Server Process Launcher”“RPC Endpoint Mapper”“Windows Time”</span><span class="hljs-comment">#将上述三者全部启动（为了方便后续操作建议打开属性——设置为自启动）</span><span class="hljs-comment">#启动后关闭编译器和程序全部重启</span><span class="hljs-comment">#获取目录下所有文件的路径</span>files = []filename = os.listdir(path)<span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filename:    filename = os.path.join(path,filename)    files.append(filename)    <span class="hljs-comment">#新建空的word文档</span>output = word.Documents.Add()<span class="hljs-comment">#拼接文档</span><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files:    output.Application.Selection.InsertFile(file)    <span class="hljs-comment">#获取合并后文档的内容</span>doc = output.Range(output.Content.Start, output.Content.End)<span class="hljs-comment">#把汇总文件保存到指定路径</span>output.SaveAs(<span class="hljs-string">r&#x27;C:\Users\DELL\Desktop\数据分析题目\汇总.docx&#x27;</span>)<span class="hljs-comment">#关闭</span>output.Close()</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Python 智能办公</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>R语言之自变量选择-2</title>
     <link href="/2020/11/30/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%87%AA%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9-2/"/>
     <url>/2020/11/30/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%87%AA%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9-2/</url>
