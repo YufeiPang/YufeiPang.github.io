@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>时间序列分析--ARIMA模型</title>
+    <link href="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="习题5-3"><a href="#习题5-3" class="headerlink" title="习题5.3"></a>习题5.3</h1><pre><code class="hljs SAS"><span class="hljs-meta">libname</span> datafile <span class="hljs-string">&#x27;d:\SASHome\myfile&#x27;</span>;<span class="hljs-keyword">data </span>datafile.example5_1;<span class="hljs-meta">input</span> sheep@@;y<span class="hljs-meta">=dif(</span>sheep);time<span class="hljs-meta">=intnx(</span><span class="hljs-string">&#x27;year&#x27;</span>,<span class="hljs-string">&#x27;01Sep1867&#x27;</span>d,<span class="hljs-literal">_n_</span>-1);<span class="hljs-meta">format</span> time YEAR.;<span class="hljs-emphasis">cards;</span><span class="hljs-emphasis">2203 2360 2254 2165 2024 2078 2214 2292 2207 2119 2119 2137 2132 1955 1785 1747 1818 1909 1958 1892 1919 1853 1868 1991 2111 2119 1991 1859 1856 1924 1892 1916 1968 1928 1898 1850 1841 1824 1823 1843 1880 1968 2029 1996 1933 1805 1713 1726 1752 1795 1717 1648 1512 1338 1383 1344 1384 1484 1597 1686 1707 1640 1611 1632 1775 1850 1809 1653 1648 1665 1627 1791</span><span class="hljs-emphasis">proc gplot data=datafile.example5_1;</span><span class="hljs-emphasis">plot sheep*time=1 y*time=2/overlay;</span><span class="hljs-emphasis">symbol1 c=red v=star i=join;</span><span class="hljs-emphasis">symbol2 c=black v=diamond i=join;</span><span class="hljs-emphasis">run;</span><span class="hljs-emphasis">proc arima data=datafile.example5_1;</span><span class="hljs-emphasis">identify var=y stationarity=(adf) minic p=(0:5) q=(0:5);</span><span class="hljs-emphasis">estimate p=2 noint;</span><span class="hljs-emphasis">run;</span><span class="hljs-emphasis">forecast lead=7 id=time out=results5_1;</span><span class="hljs-emphasis">run;</span><span class="hljs-emphasis">proc gplot data=results5_1;</span><span class="hljs-emphasis">plot y*time=1 forecast*time=2 l95*time=3 u95*time=3/overlay;</span><span class="hljs-emphasis">symbol1 c=black v=star i=none;</span><span class="hljs-emphasis">symbol2 c=red v=none i=join;</span><span class="hljs-emphasis">symbol3 c=green v=none i=join l=32;</span><span class="hljs-emphasis">run;</span></code></pre><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/1.png" class=""><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/2.png" class=""><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/3.png" class=""><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/4.png" class=""><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/5.png" class=""><img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/6.png" class="">]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>SAS 时间序列分析 ARIMA模型</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>R语言之多重共线性与岭回归</title>
     <link href="/2020/12/14/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E4%B8%8E%E5%B2%AD%E5%9B%9E%E5%BD%92/"/>
     <url>/2020/12/14/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E4%B8%8E%E5%B2%AD%E5%9B%9E%E5%BD%92/</url>

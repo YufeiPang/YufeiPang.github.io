@@ -17,9 +17,25 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>Archives - Hexo</title>
+  <title>时间序列分析--ARIMA模型 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
 
 
 
@@ -47,7 +63,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -146,9 +162,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Archive">
+            <span class="h2" id="subtitle" title="时间序列分析--ARIMA模型">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-19 22:55" pubdate>
+        December 19, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      205 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -161,106 +214,107 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">11 posts in total.</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">时间序列分析--ARIMA模型</span>
-      <time style="float: right;">12-19</time>
-    </a>
-  
-    
-    <a href="/2020/12/14/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E4%B8%8E%E5%B2%AD%E5%9B%9E%E5%BD%92/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">R语言之多重共线性与岭回归</span>
-      <time style="float: right;">12-14</time>
-    </a>
-  
-    
-    <a href="/2020/12/07/%E7%94%A8Python%E6%89%B9%E9%87%8F%E5%90%88%E5%B9%B6Word%E6%96%87%E6%A1%A3/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">用Python批量合并Word文档</span>
-      <time style="float: right;">12-07</time>
-    </a>
-  
-    
-    <a href="/2020/11/30/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%87%AA%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9-2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">R语言之自变量选择-2</span>
-      <time style="float: right;">11-30</time>
-    </a>
-  
-    
-    <a href="/2020/11/28/%E8%A7%A3%E5%86%B3Hexo%E5%8D%9A%E5%AE%A2MathJax%E5%85%AC%E5%BC%8F%E6%B8%B2%E6%9F%93%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">解决Hexo博客MathJax公式渲染问题</span>
-      <time style="float: right;">11-28</time>
-    </a>
-  
-    
-    <a href="/2020/11/28/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%87%AA%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9-1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">R语言之自变量选择(1)</span>
-      <time style="float: right;">11-28</time>
-    </a>
-  
-    
-    <a href="/2020/11/17/%E8%A7%A3%E5%86%B3Hexo%E6%A1%86%E6%9E%B6%E5%8D%9A%E5%AE%A2%E5%BC%95%E7%94%A8%E5%9B%BE%E7%89%87%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">解决Hexo框架博客引用图片失败的问题</span>
-      <time style="float: right;">11-17</time>
-    </a>
-  
-    
-    <a href="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">R语言之序列的自相关检验与处理-多元线性回归</span>
-      <time style="float: right;">11-17</time>
-    </a>
-  
-    
-    <a href="/2020/11/17/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%BA%8F%E5%88%97%E7%9A%84%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A3%80%E9%AA%8C%E4%B8%8E%E5%A4%84%E7%90%86-%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">R语言之序列的自相关检验与处理-一元线性回归</span>
-      <time style="float: right;">11-17</time>
-    </a>
-  
-    
-    <a href="/2020/11/13/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%E6%A1%86%E6%9E%B6%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">搭建个人博客（Hexo框架）</span>
-      <time style="float: right;">11-13</time>
-    </a>
-  
-</div>
 
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
-
-
-
-
-              </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">时间序列分析--ARIMA模型</h1>
+            
+            <div class="markdown-body">
+              <h1 id="习题5-3"><a href="#习题5-3" class="headerlink" title="习题5.3"></a>习题5.3</h1><pre><code class="hljs SAS"><span class="hljs-meta">libname</span> datafile <span class="hljs-string">&#x27;d:\SASHome\myfile&#x27;</span>;
+<span class="hljs-keyword">data </span>datafile.example5_1;
+<span class="hljs-meta">input</span> sheep@@;
+y<span class="hljs-meta">=dif(</span>sheep);
+time<span class="hljs-meta">=intnx(</span><span class="hljs-string">&#x27;year&#x27;</span>,<span class="hljs-string">&#x27;01Sep1867&#x27;</span>d,<span class="hljs-literal">_n_</span>-1);
+<span class="hljs-meta">format</span> time YEAR.;
+<span class="hljs-emphasis">cards;</span>
+<span class="hljs-emphasis">2203 2360 2254 2165 2024 2078 2214 2292 2207 2119 2119 2137 2132 1955 1785 1747 1818 1909 1958 1892 1919 1853 1868 1991 2111 2119 1991 1859 1856 1924 1892 1916 1968 1928 1898 1850 1841 1824 1823 1843 1880 1968 2029 1996 1933 1805 1713 1726 1752 1795 1717 1648 1512 1338 1383 1344 1384 1484 1597 1686 1707 1640 1611 1632 1775 1850 1809 1653 1648 1665 1627 1791</span>
+<span class="hljs-emphasis">proc gplot data=datafile.example5_1;</span>
+<span class="hljs-emphasis">plot sheep*time=1 y*time=2/overlay;</span>
+<span class="hljs-emphasis">symbol1 c=red v=star i=join;</span>
+<span class="hljs-emphasis">symbol2 c=black v=diamond i=join;</span>
+<span class="hljs-emphasis">run;</span>
+<span class="hljs-emphasis">proc arima data=datafile.example5_1;</span>
+<span class="hljs-emphasis">identify var=y stationarity=(adf) minic p=(0:5) q=(0:5);</span>
+<span class="hljs-emphasis">estimate p=2 noint;</span>
+<span class="hljs-emphasis">run;</span>
+<span class="hljs-emphasis">forecast lead=7 id=time out=results5_1;</span>
+<span class="hljs-emphasis">run;</span>
+<span class="hljs-emphasis">proc gplot data=results5_1;</span>
+<span class="hljs-emphasis">plot y*time=1 forecast*time=2 l95*time=3 u95*time=3/overlay;</span>
+<span class="hljs-emphasis">symbol1 c=black v=star i=none;</span>
+<span class="hljs-emphasis">symbol2 c=red v=none i=join;</span>
+<span class="hljs-emphasis">symbol3 c=green v=none i=join l=32;</span>
+<span class="hljs-emphasis">run;</span></code></pre>
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/1.png" srcset="/img/loading.gif" class="">
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/2.png" srcset="/img/loading.gif" class="">
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/3.png" srcset="/img/loading.gif" class="">
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/4.png" srcset="/img/loading.gif" class="">
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/5.png" srcset="/img/loading.gif" class="">
+<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/6.png" srcset="/img/loading.gif" class="">
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SAS-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/">SAS 时间序列分析 ARIMA模型</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/14/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E4%B8%8E%E5%B2%AD%E5%9B%9E%E5%BD%92/">
+                        <span class="hidden-mobile">R语言之多重共线性与岭回归</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -343,9 +397,15 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
@@ -383,6 +443,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
