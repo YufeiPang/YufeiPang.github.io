@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>时间序列分析--ARIMA模型 - Hexo</title>
+  <title>机器学习实战--降维算法PCA - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="时间序列分析--ARIMA模型">
+            <span class="h2" id="subtitle" title="机器学习实战--降维算法PCA">
               
             </span>
 
@@ -172,7 +172,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-19 22:55" pubdate>
+      <time datetime="2020-12-19 23:21" pubdate>
         December 19, 2020 pm
       </time>
     </span>
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      205 字
+      415 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      5
        分钟
     </span>
   
@@ -224,40 +224,61 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">时间序列分析--ARIMA模型</h1>
+            <h1 style="display: none">机器学习实战--降维算法PCA</h1>
             
             <div class="markdown-body">
-              <h1 id="习题5-3"><a href="#习题5-3" class="headerlink" title="习题5.3"></a>习题5.3</h1><pre><code class="hljs SAS"><span class="hljs-meta">libname</span> datafile <span class="hljs-string">&#x27;d:\SASHome\myfile&#x27;</span>;
-<span class="hljs-keyword">data </span>datafile.example5_1;
-<span class="hljs-meta">input</span> sheep@@;
-y<span class="hljs-meta">=dif(</span>sheep);
-time<span class="hljs-meta">=intnx(</span><span class="hljs-string">&#x27;year&#x27;</span>,<span class="hljs-string">&#x27;01Sep1867&#x27;</span>d,<span class="hljs-literal">_n_</span>-1);
-<span class="hljs-meta">format</span> time YEAR.;
-<span class="hljs-emphasis">cards;</span>
-<span class="hljs-emphasis">2203 2360 2254 2165 2024 2078 2214 2292 2207 2119 2119 2137 2132 1955 1785 1747 1818 1909 1958 1892 1919 1853 1868 1991 2111 2119 1991 1859 1856 1924 1892 1916 1968 1928 1898 1850 1841 1824 1823 1843 1880 1968 2029 1996 1933 1805 1713 1726 1752 1795 1717 1648 1512 1338 1383 1344 1384 1484 1597 1686 1707 1640 1611 1632 1775 1850 1809 1653 1648 1665 1627 1791</span>
-<span class="hljs-emphasis">proc gplot data=datafile.example5_1;</span>
-<span class="hljs-emphasis">plot sheep*time=1 y*time=2/overlay;</span>
-<span class="hljs-emphasis">symbol1 c=red v=star i=join;</span>
-<span class="hljs-emphasis">symbol2 c=black v=diamond i=join;</span>
-<span class="hljs-emphasis">run;</span>
-<span class="hljs-emphasis">proc arima data=datafile.example5_1;</span>
-<span class="hljs-emphasis">identify var=y stationarity=(adf) minic p=(0:5) q=(0:5);</span>
-<span class="hljs-emphasis">estimate p=2 noint;</span>
-<span class="hljs-emphasis">run;</span>
-<span class="hljs-emphasis">forecast lead=7 id=time out=results5_1;</span>
-<span class="hljs-emphasis">run;</span>
-<span class="hljs-emphasis">proc gplot data=results5_1;</span>
-<span class="hljs-emphasis">plot y*time=1 forecast*time=2 l95*time=3 u95*time=3/overlay;</span>
-<span class="hljs-emphasis">symbol1 c=black v=star i=none;</span>
-<span class="hljs-emphasis">symbol2 c=red v=none i=join;</span>
-<span class="hljs-emphasis">symbol3 c=green v=none i=join l=32;</span>
-<span class="hljs-emphasis">run;</span></code></pre>
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/1.png" srcset="/img/loading.gif" class="">
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/2.png" srcset="/img/loading.gif" class="">
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/3.png" srcset="/img/loading.gif" class="">
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/4.png" srcset="/img/loading.gif" class="">
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/5.png" srcset="/img/loading.gif" class="">
-<img src="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/6.png" srcset="/img/loading.gif" class="">
+              <h1 id="1-导入需要的模块、库和数据"><a href="#1-导入需要的模块、库和数据" class="headerlink" title="1.导入需要的模块、库和数据"></a>1.导入需要的模块、库和数据</h1><pre><code class="hljs python"><span class="hljs-comment">#导入需要的模块和库</span>
+<span class="hljs-keyword">from</span> sklearn.decomposition <span class="hljs-keyword">import</span> PCA
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</code></pre>
+<pre><code class="hljs python"><span class="hljs-comment">#导入数据</span>
+data = pd.read_csv(<span class="hljs-string">r&quot;C:\Users\DELL\Desktop\pca_data.csv&quot;</span>)
+data</code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/1.png" srcset="/img/loading.gif" class="">
+<h1 id="2-数据标准化"><a href="#2-数据标准化" class="headerlink" title="2.数据标准化"></a>2.数据标准化</h1><pre><code class="hljs python"><span class="hljs-comment">#标准化(使特征数据方差为1,均值为0)</span>
+<span class="hljs-comment">#使用sklearn的包</span>
+scaler=StandardScaler()
+scaler.fit(data)<span class="hljs-comment">#使用transfrom必须要用fit语句</span>
+trans_data=scaler.transform(data)<span class="hljs-comment">#transfrom通过找中心和缩放等实现标准化</span>
+fit_trans_data=scaler.fit_transform(data)<span class="hljs-comment">#fit_transfrom为先拟合数据,然后转化它将其转化为标准形式</span>
+print(<span class="hljs-string">&#x27;使用fit.transform标准化的数据:\n&#x27;</span>, trans_data)
+print(<span class="hljs-string">&#x27;使用fit_transform标准化的数据:\n&#x27;</span>, fit_trans_data)</code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/2.png" srcset="/img/loading.gif" class="">
+<pre><code class="hljs python">trans_data.shape
+<span class="hljs-comment">#由输出结果(442,11)可知本数据中含有11个特征</span></code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/3.png" srcset="/img/loading.gif" class="">
+<h1 id="3-寻找降维维数超参数k"><a href="#3-寻找降维维数超参数k" class="headerlink" title="3.寻找降维维数超参数k"></a>3.寻找降维维数超参数k</h1><h3 id="1-法1-画累计方差贡献率曲线，找最佳降维维数"><a href="#1-法1-画累计方差贡献率曲线，找最佳降维维数" class="headerlink" title="(1)法1.画累计方差贡献率曲线，找最佳降维维数"></a>(1)法1.画累计方差贡献率曲线，找最佳降维维数</h3><pre><code class="hljs python"><span class="hljs-comment">#寻找降维维数超参数k</span>
+<span class="hljs-comment">#法1.画累计方差贡献率曲线，找最佳降维维数</span>
+pca_line = PCA().fit(trans_data)
+plt.figure(figsize=[<span class="hljs-number">20</span>,<span class="hljs-number">5</span>])
+plt.plot(np.cumsum(pca_line.explained_variance_ratio_))
+plt.xlabel(<span class="hljs-string">&quot;number of components after dimension reduction&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;cumulative explained variance ratio&quot;</span>)
+plt.show()</code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/4.png" srcset="/img/loading.gif" class="">
+<pre><code class="hljs python"><span class="hljs-comment">#导入找出的最佳维度进行降维，得到新的特征向量</span>
+X_dr = PCA(<span class="hljs-number">5</span>).fit_transform(trans_data)
+X_dr 
+<span class="hljs-comment">#得到k=5</span></code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/5.png" srcset="/img/loading.gif" class="">
+<h3 id="2-法2-按信息量占比选超参数"><a href="#2-法2-按信息量占比选超参数" class="headerlink" title="(2)法2.按信息量占比选超参数"></a>(2)法2.按信息量占比选超参数</h3><pre><code class="hljs python"><span class="hljs-comment">#法2.按信息量占比选超参数</span>
+pca_f = PCA(n_components=<span class="hljs-number">0.8</span>,svd_solver=<span class="hljs-string">&quot;full&quot;</span>)
+pca_f = pca_f.fit(trans_data)
+X_f = pca_f.transform(trans_data)
+X_f 
+<span class="hljs-comment">#得到k=5</span></code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/6.png" srcset="/img/loading.gif" class="">
+<pre><code class="hljs python"><span class="hljs-comment">#可解释方差贡献率</span>
+pca_f.explained_variance_ratio_
+<span class="hljs-comment">#结果为array([0.39971949, 0.14225403, 0.11485306, 0.0991074 , 0.0602072 ])</span>
+<span class="hljs-comment">#得到k=5</span></code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/7.png" srcset="/img/loading.gif" class="">
+<pre><code class="hljs python"><span class="hljs-comment">#累计可解释方差贡献率</span>
+pca_f.explained_variance_ratio_.<span class="hljs-built_in">sum</span>()
+<span class="hljs-comment">#结果为0.8161411837340584</span></code></pre>
+<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/8.png" srcset="/img/loading.gif" class="">
             </div>
             <hr>
             <div>
@@ -267,7 +288,7 @@ time<span class="hljs-meta">=intnx(</span><span class="hljs-string">&#x27;year&#
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/SAS-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/">SAS 时间序列分析 ARIMA模型</a>
+                      <a class="hover-with-bg" href="/tags/Python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%99%8D%E7%BB%B4-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA/">Python 机器学习 降维 主成分分析 PCA</a>
                     
                   </div>
                 
@@ -280,18 +301,12 @@ time<span class="hljs-meta">=intnx(</span><span class="hljs-string">&#x27;year&#
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">机器学习实战--降维算法PCA</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/14/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7%E4%B8%8E%E5%B2%AD%E5%9B%9E%E5%BD%92/">
-                        <span class="hidden-mobile">R语言之多重共线性与岭回归</span>
+                      <a href="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/">
+                        <span class="hidden-mobile">时间序列分析--ARIMA模型</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
