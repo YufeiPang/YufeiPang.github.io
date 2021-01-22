@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>机器学习实战--降维算法PCA - Hexo</title>
+  <title>破译加密压缩包教程 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="机器学习实战--降维算法PCA">
+            <span class="h2" id="subtitle" title="破译加密压缩包教程">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-19 23:21" pubdate>
-        December 19, 2020 pm
+      <time datetime="2021-01-22 15:34" pubdate>
+        January 22, 2021 pm
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      415 字
+      153 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      1
        分钟
     </span>
   
@@ -224,61 +224,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">机器学习实战--降维算法PCA</h1>
+            <h1 style="display: none">破译加密压缩包教程</h1>
             
             <div class="markdown-body">
-              <h1 id="1-导入需要的模块、库和数据"><a href="#1-导入需要的模块、库和数据" class="headerlink" title="1.导入需要的模块、库和数据"></a>1.导入需要的模块、库和数据</h1><pre><code class="hljs python"><span class="hljs-comment">#导入需要的模块和库</span>
-<span class="hljs-keyword">from</span> sklearn.decomposition <span class="hljs-keyword">import</span> PCA
-<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler
-<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</code></pre>
-<pre><code class="hljs python"><span class="hljs-comment">#导入数据</span>
-data = pd.read_csv(<span class="hljs-string">r&quot;C:\Users\DELL\Desktop\pca_data.csv&quot;</span>)
-data</code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/1.png" srcset="/img/loading.gif" class="">
-<h1 id="2-数据标准化"><a href="#2-数据标准化" class="headerlink" title="2.数据标准化"></a>2.数据标准化</h1><pre><code class="hljs python"><span class="hljs-comment">#标准化(使特征数据方差为1,均值为0)</span>
-<span class="hljs-comment">#使用sklearn的包</span>
-scaler=StandardScaler()
-scaler.fit(data)<span class="hljs-comment">#使用transfrom必须要用fit语句</span>
-trans_data=scaler.transform(data)<span class="hljs-comment">#transfrom通过找中心和缩放等实现标准化</span>
-fit_trans_data=scaler.fit_transform(data)<span class="hljs-comment">#fit_transfrom为先拟合数据,然后转化它将其转化为标准形式</span>
-print(<span class="hljs-string">&#x27;使用fit.transform标准化的数据:\n&#x27;</span>, trans_data)
-print(<span class="hljs-string">&#x27;使用fit_transform标准化的数据:\n&#x27;</span>, fit_trans_data)</code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/2.png" srcset="/img/loading.gif" class="">
-<pre><code class="hljs python">trans_data.shape
-<span class="hljs-comment">#由输出结果(442,11)可知本数据中含有11个特征</span></code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/3.png" srcset="/img/loading.gif" class="">
-<h1 id="3-寻找降维维数超参数k"><a href="#3-寻找降维维数超参数k" class="headerlink" title="3.寻找降维维数超参数k"></a>3.寻找降维维数超参数k</h1><h3 id="1-法1-画累计方差贡献率曲线，找最佳降维维数"><a href="#1-法1-画累计方差贡献率曲线，找最佳降维维数" class="headerlink" title="(1)法1.画累计方差贡献率曲线，找最佳降维维数"></a>(1)法1.画累计方差贡献率曲线，找最佳降维维数</h3><pre><code class="hljs python"><span class="hljs-comment">#寻找降维维数超参数k</span>
-<span class="hljs-comment">#法1.画累计方差贡献率曲线，找最佳降维维数</span>
-pca_line = PCA().fit(trans_data)
-plt.figure(figsize=[<span class="hljs-number">20</span>,<span class="hljs-number">5</span>])
-plt.plot(np.cumsum(pca_line.explained_variance_ratio_))
-plt.xlabel(<span class="hljs-string">&quot;number of components after dimension reduction&quot;</span>)
-plt.ylabel(<span class="hljs-string">&quot;cumulative explained variance ratio&quot;</span>)
-plt.show()</code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/4.png" srcset="/img/loading.gif" class="">
-<pre><code class="hljs python"><span class="hljs-comment">#导入找出的最佳维度进行降维，得到新的特征向量</span>
-X_dr = PCA(<span class="hljs-number">5</span>).fit_transform(trans_data)
-X_dr 
-<span class="hljs-comment">#得到k=5</span></code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/5.png" srcset="/img/loading.gif" class="">
-<h3 id="2-法2-按信息量占比选超参数"><a href="#2-法2-按信息量占比选超参数" class="headerlink" title="(2)法2.按信息量占比选超参数"></a>(2)法2.按信息量占比选超参数</h3><pre><code class="hljs python"><span class="hljs-comment">#法2.按信息量占比选超参数</span>
-pca_f = PCA(n_components=<span class="hljs-number">0.8</span>,svd_solver=<span class="hljs-string">&quot;full&quot;</span>)
-pca_f = pca_f.fit(trans_data)
-X_f = pca_f.transform(trans_data)
-X_f 
-<span class="hljs-comment">#得到k=5</span></code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/6.png" srcset="/img/loading.gif" class="">
-<pre><code class="hljs python"><span class="hljs-comment">#可解释方差贡献率</span>
-pca_f.explained_variance_ratio_
-<span class="hljs-comment">#结果为array([0.39971949, 0.14225403, 0.11485306, 0.0991074 , 0.0602072 ])</span>
-<span class="hljs-comment">#得到k=5</span></code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/7.png" srcset="/img/loading.gif" class="">
-<pre><code class="hljs python"><span class="hljs-comment">#累计可解释方差贡献率</span>
-pca_f.explained_variance_ratio_.<span class="hljs-built_in">sum</span>()
-<span class="hljs-comment">#结果为0.8161411837340584</span></code></pre>
-<img src="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/8.png" srcset="/img/loading.gif" class="">
+              <h3 id="1-下载破译软件cRARk：https-www-crark-net-download-crark55-rar"><a href="#1-下载破译软件cRARk：https-www-crark-net-download-crark55-rar" class="headerlink" title="1.下载破译软件cRARk：https://www.crark.net/download/crark55.rar"></a>1.下载破译软件cRARk：<a target="_blank" rel="noopener" href="https://www.crark.net/download/crark55.rar">https://www.crark.net/download/crark55.rar</a></h3><h3 id="2-打开记事本手动编写密码簿"><a href="#2-打开记事本手动编写密码簿" class="headerlink" title="2.打开记事本手动编写密码簿:"></a>2.打开记事本手动编写密码簿:</h3><h5 id="以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例："><a href="#以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例：" class="headerlink" title="以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例："></a>以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例：</h5><pre><code class="hljs elixir"><span class="hljs-comment">##</span>
+[<span class="hljs-variable">$a</span>] * 
+[<span class="hljs-variable">$A</span>] * 
+[<span class="hljs-variable">$1</span>] * 
+[<span class="hljs-variable">$!</span>] * 
+[<span class="hljs-variable">$a</span> <span class="hljs-variable">$A</span>] * 
+[<span class="hljs-variable">$a</span> <span class="hljs-variable">$1</span>] * 
+[<span class="hljs-variable">$a</span> <span class="hljs-variable">$!</span>] * 
+[<span class="hljs-variable">$1</span> <span class="hljs-variable">$A</span>] * 
+[<span class="hljs-variable">$!</span> <span class="hljs-variable">$A</span>] * 
+[<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span>] * 
+[<span class="hljs-variable">$A</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span>] * 
+[<span class="hljs-variable">$A</span> <span class="hljs-variable">$!</span> <span class="hljs-variable">$a</span>] * 
+[<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span>] * 
+[<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$A</span>] * 
+[<span class="hljs-variable">$A</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span> <span class="hljs-variable">$!</span>] *</code></pre>
+<h3 id="3-保存后将-txt文件后缀更改为-def"><a href="#3-保存后将-txt文件后缀更改为-def" class="headerlink" title="3.保存后将.txt文件后缀更改为.def"></a>3.保存后将.txt文件后缀更改为.def</h3><img src="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/1.png" srcset="/img/loading.gif" class="">
+<h3 id="4-将想要解压的加密压缩包放入cRARk程序所在文件夹"><a href="#4-将想要解压的加密压缩包放入cRARk程序所在文件夹" class="headerlink" title="4.将想要解压的加密压缩包放入cRARk程序所在文件夹"></a>4.将想要解压的加密压缩包放入cRARk程序所在文件夹</h3><h3 id="5-打开cmd命令行，进入cRARk程序所在目录，运行如下命令"><a href="#5-打开cmd命令行，进入cRARk程序所在目录，运行如下命令" class="headerlink" title="5.打开cmd命令行，进入cRARk程序所在目录，运行如下命令"></a>5.打开cmd命令行，进入cRARk程序所在目录，运行如下命令</h3><pre><code class="hljs css"><span class="hljs-selector-tag">E</span>:\<span class="hljs-selector-tag">crank</span>&gt;<span class="hljs-selector-tag">cRARK</span><span class="hljs-selector-class">.exe</span> 压缩包名称<span class="hljs-selector-class">.rar</span></code></pre>
+<h5 id="运行示例："><a href="#运行示例：" class="headerlink" title="运行示例："></a>运行示例：</h5><img src="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/2.png" srcset="/img/loading.gif" class="">
             </div>
             <hr>
             <div>
@@ -288,7 +255,7 @@ pca_f.explained_variance_ratio_.<span class="hljs-built_in">sum</span>()
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%99%8D%E7%BB%B4-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA/">Python 机器学习 降维 主成分分析 PCA</a>
+                      <a class="hover-with-bg" href="/tags/%E7%A0%B4%E8%AF%91%E5%AF%86%E7%A0%81-%E5%8E%8B%E7%BC%A9%E5%8C%85-%E6%95%99%E7%A8%8B/">破译密码 压缩包 教程</a>
                     
                   </div>
                 
@@ -301,18 +268,12 @@ pca_f.explained_variance_ratio_.<span class="hljs-built_in">sum</span>()
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">破译加密压缩包教程</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/19/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90-ARIMA%E6%A8%A1%E5%9E%8B/">
-                        <span class="hidden-mobile">时间序列分析--ARIMA模型</span>
+                      <a href="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/">
+                        <span class="hidden-mobile">机器学习实战--降维算法PCA</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

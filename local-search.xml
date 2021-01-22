@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>破译加密压缩包教程</title>
+    <link href="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/"/>
+    <url>/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h3 id="1-下载破译软件cRARk：https-www-crark-net-download-crark55-rar"><a href="#1-下载破译软件cRARk：https-www-crark-net-download-crark55-rar" class="headerlink" title="1.下载破译软件cRARk：https://www.crark.net/download/crark55.rar"></a>1.下载破译软件cRARk：<a href="https://www.crark.net/download/crark55.rar">https://www.crark.net/download/crark55.rar</a></h3><h3 id="2-打开记事本手动编写密码簿"><a href="#2-打开记事本手动编写密码簿" class="headerlink" title="2.打开记事本手动编写密码簿:"></a>2.打开记事本手动编写密码簿:</h3><h5 id="以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例："><a href="#以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例：" class="headerlink" title="以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例："></a>以下为一个密码中包含英文大小写字母、数字、标点符号及其组合的案例：</h5><pre><code class="hljs elixir"><span class="hljs-comment">##</span>[<span class="hljs-variable">$a</span>] * [<span class="hljs-variable">$A</span>] * [<span class="hljs-variable">$1</span>] * [<span class="hljs-variable">$!</span>] * [<span class="hljs-variable">$a</span> <span class="hljs-variable">$A</span>] * [<span class="hljs-variable">$a</span> <span class="hljs-variable">$1</span>] * [<span class="hljs-variable">$a</span> <span class="hljs-variable">$!</span>] * [<span class="hljs-variable">$1</span> <span class="hljs-variable">$A</span>] * [<span class="hljs-variable">$!</span> <span class="hljs-variable">$A</span>] * [<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span>] * [<span class="hljs-variable">$A</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span>] * [<span class="hljs-variable">$A</span> <span class="hljs-variable">$!</span> <span class="hljs-variable">$a</span>] * [<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span>] * [<span class="hljs-variable">$!</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$A</span>] * [<span class="hljs-variable">$A</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$a</span> <span class="hljs-variable">$!</span>] *</code></pre><h3 id="3-保存后将-txt文件后缀更改为-def"><a href="#3-保存后将-txt文件后缀更改为-def" class="headerlink" title="3.保存后将.txt文件后缀更改为.def"></a>3.保存后将.txt文件后缀更改为.def</h3><img src="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/1.png" class=""><h3 id="4-将想要解压的加密压缩包放入cRARk程序所在文件夹"><a href="#4-将想要解压的加密压缩包放入cRARk程序所在文件夹" class="headerlink" title="4.将想要解压的加密压缩包放入cRARk程序所在文件夹"></a>4.将想要解压的加密压缩包放入cRARk程序所在文件夹</h3><h3 id="5-打开cmd命令行，进入cRARk程序所在目录，运行如下命令"><a href="#5-打开cmd命令行，进入cRARk程序所在目录，运行如下命令" class="headerlink" title="5.打开cmd命令行，进入cRARk程序所在目录，运行如下命令"></a>5.打开cmd命令行，进入cRARk程序所在目录，运行如下命令</h3><pre><code class="hljs css"><span class="hljs-selector-tag">E</span>:\<span class="hljs-selector-tag">crank</span>&gt;<span class="hljs-selector-tag">cRARK</span><span class="hljs-selector-class">.exe</span> 压缩包名称<span class="hljs-selector-class">.rar</span></code></pre><h5 id="运行示例："><a href="#运行示例：" class="headerlink" title="运行示例："></a>运行示例：</h5><img src="/2021/01/22/%E7%A0%B4%E8%AF%91%E5%8A%A0%E5%AF%86%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%95%99%E7%A8%8B/2.png" class="">]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>破译密码 压缩包 教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>机器学习实战--降维算法PCA</title>
     <link href="/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/"/>
     <url>/2020/12/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95PCA/</url>
